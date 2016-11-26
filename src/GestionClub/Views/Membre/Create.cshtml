@@ -1,0 +1,70 @@
+@model GestionClub.Models.MembreViewModels.MembreViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>MembreViewModel</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="ID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NomUtilisateur" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NomUtilisateur" class="form-control" />
+                <span asp-validation-for="NomUtilisateur" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageData" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ImageData" class="form-control" />
+                <span asp-validation-for="ImageData" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Rang" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Rang" class="form-control" />
+                <span asp-validation-for="Rang" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Role" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

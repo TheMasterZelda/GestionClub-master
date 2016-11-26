@@ -1,0 +1,72 @@
+@model IEnumerable<GestionClub.Models.ForumViewModels.ForumViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
+    {
+        <a asp-action="Create">Ajouter un sujet</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auteur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dernier)
+            </th>
+            <th>
+                #
+            </th>
+            <th>
+                @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
+                {
+                    @:Actions
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-area="" asp-controller="Message" asp-action="Index" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Titre)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Auteur)
+                    @Html.DisplayFor(modelItem => item.DateCreation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dernier)
+                    @Html.DisplayFor(modelItem => item.DateModification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreMessage)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
+                    {
+                        @Html.ActionLink("Modifier", "Edit", new { id = item.ID }) @:|
+                        @Html.ActionLink("Supprimer", "Delete", new { id = item.ID })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

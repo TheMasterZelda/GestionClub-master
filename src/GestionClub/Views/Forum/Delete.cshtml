@@ -1,0 +1,70 @@
+@model GestionClub.Models.ForumViewModels.ForumViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Suppression</h2>
+
+<h3>Êtes-vous sûr de vouloir supprimer ce sujet?</h3>
+<div>
+    <h4>ForumViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Titre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Titre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Auteur)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Auteur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dernier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dernier)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateModification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreMessage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreMessage)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Retourner à la liste des sujets</a>
+        </div>
+    </form>
+</div>

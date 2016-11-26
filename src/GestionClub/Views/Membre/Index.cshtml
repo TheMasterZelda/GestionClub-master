@@ -1,0 +1,72 @@
+@model IEnumerable<GestionClub.Models.MembreViewModels.MembreViewModel>
+
+@{
+    ViewData["Title"] = "Liste des membres";
+}
+
+<h2>Index</h2>
+
+<p>
+    @if (User.IsInRole("Administrateur"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomUtilisateur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomUtilisateur)
+                </td>
+                <td>
+                    @if (item.ImageData != null)
+                {
+                        <img class="image_profil" src="data:@item.ImageType;base64,@Convert.ToBase64String(item.ImageData)" alt="@item.ImageNom" />
+                    }
+                    else
+                    {
+                        <img class="image_profil" src="~/images/no-image.png" alt="Pas d'image'" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrateur"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) @:|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

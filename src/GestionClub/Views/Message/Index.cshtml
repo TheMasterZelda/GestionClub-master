@@ -1,0 +1,63 @@
+@model IEnumerable<GestionClub.Models.MessageViewModels.MessageViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Sujet : @Html.DisplayFor(model => model.FirstOrDefault().Frm.Titre)</h2>
+<h2>Description : @Html.DisplayFor(model => model.FirstOrDefault().Frm.Description)</h2>
+
+<p>
+    @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur") || User.IsInRole("Utilisateur"))
+    {
+        <a asp-action="Create" asp-route-id="@Model.FirstOrDefault().ID">Ajouter un message</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Auteur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Texte)
+            </th>
+            <th>
+                @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
+                {
+                    @:Action
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Auteur)
+                    <br />
+                    @if (item.ImageData != null)
+                {
+                        <img class="image_profil" src="data:@item.ImageType;base64,@Convert.ToBase64String(item.ImageData)" alt="@item.ImageNom" />
+                    }
+                    else
+                    {
+                        <img class="image_profil" src="~/images/no-image.png" alt="Pas d'image'" />
+                    }
+                    <br />
+                    @Html.DisplayFor(modelItem => item.DateMessage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Texte)
+                </td>
+                <td>
+                    @if ((User.IsInRole("Administrateur") || User.IsInRole("Modérateur")) && item != Model.First())
+                    {
+                        @Html.ActionLink("Supprimer", "Delete", new { id = item.ID })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

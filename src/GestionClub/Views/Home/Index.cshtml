@@ -1,14 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Accueil";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Title"];
 }
 
-<h1 style="font-family:coinyregular">Bienvenue sur le site du club d'échecs RnD.</h1>
+<h1 style="font-family:coinyregular">@Localizer["Welcome"]</h1>
 
-<h3>La stratégie de la semaine : (Prochainement)</h3>
+<h3>@Localizer["Strategy"]</h3>
 
 <img src="~/images/chess strategy.jpg" style="width:100%;height:100%"/>
 
-<h4>Magnus Carlsen :</h4>
-<h5>Champion d'échecs depuis 2010, Titre de Grandmaster depuis 2004. Il est la mascotte du club RnD.</h5>
+<h4>@Localizer["Magnus"]</h4>
+<h5>@Localizer["DescriptionMagnus"]</h5>
 
 <img src="~/images/Markus.jpg" />

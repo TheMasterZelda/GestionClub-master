@@ -2830,6 +2830,14 @@
         },
         "runtime": {
           "GestionClub.dll": {}
+        },
+        "resources": {
+          "en/GestionClub.resources.dll": {
+            "locale": "en"
+          },
+          "fr/GestionClub.resources.dll": {
+            "locale": "fr"
+          }
         }
       },
       "Libuv/1.9.0": {

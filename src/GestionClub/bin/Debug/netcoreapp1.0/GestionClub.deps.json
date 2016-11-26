@@ -38,6 +38,14 @@
         "runtime": {
           "GestionClub.dll": {}
         },
+        "resources": {
+          "en/GestionClub.resources.dll": {
+            "locale": "en"
+          },
+          "fr/GestionClub.resources.dll": {
+            "locale": "fr"
+          }
+        },
         "compile": {
           "GestionClub.dll": {}
         }

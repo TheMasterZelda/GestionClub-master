@@ -1,13 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Title"];
 }
-<h2>@ViewData["Title"].</h2>
-<h3>Pour nous contacter : </h3>
+<h2>@ViewData["Title"]</h2>
+<h3>@Localizer["ContactUs"]</h3>
 
 <address>
-    Courriel : clubechecsrnd@rndmail.org <br />
-    Adresse : 3000 Avenue Boullé, Saint-Hyacinthe, QC J2S 1H9 <br />
-    Téléphone : (Prochainement, temporairement (514) 875-4445 poste 420)
+    @Localizer["Email"] <br />
+    @Localizer["Address"]<br />
+    @Localizer["Phone"]
 </address>
 
 <img src="~/images/map.jpg" />

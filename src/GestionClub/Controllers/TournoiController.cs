@@ -4,29 +4,66 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using GestionClub.Data;
+using Microsoft.EntityFrameworkCore;
+using GestionClub.Models.TournoiViewModels;
+using GestionClub.Models;
+using Microsoft.AspNetCore.Authorization;
+
 namespace GestionClub.Controllers
 {
     public class TournoiController : Controller
     {
+        private ApplicationDbContext _context = null;
+        public TournoiController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
         // GET: Tournoi
         public ActionResult Index()
         {
-            return View();
+            List<TournoiViewModel> liste_vm = new List<TournoiViewModel>();
+
+            var tournois = _context.Tournois
+                         .Include(p => p.Participants)
+                         .Include(u => u.Parties);
+
+            foreach (Tournoi t in tournois)
+            {
+                liste_vm.Add(new TournoiViewModel(t));
+            }
+
+            liste_vm.OrderBy(d => d.DateCreation);
+
+            return View(liste_vm);
         }
 
         // GET: Tournoi/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            TournoiViewModel tournoiVM = new TournoiViewModel(_context.Tournois.Include(p => p.Participants).Include(p => p.Parties).FirstOrDefault(t => t.ID == id));
+
+            return View(tournoiVM);
         }
 
+        // GET : Tournoi/Arborescence/5
+        public ActionResult Arborescence(int id)
+        {
+            TournoiViewModel tournoiVM = new TournoiViewModel(_context.Tournois.Include(p => p.Participants).Include(p => p.Parties).FirstOrDefault(t => t.ID == id));
+
+            return View(tournoiVM);
+        }
         // GET: Tournoi/Create
+        [Authorize(Roles = "Administrateur,Modérateur")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Tournoi/Create
+        [Authorize(Roles = "Administrateur,Modérateur")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -67,19 +104,24 @@ namespace GestionClub.Controllers
         }
 
         // GET: Tournoi/Delete/5
+        [Authorize(Roles = "Administrateur,Modérateur")]
         public ActionResult Delete(int id)
         {
-            return View();
+            TournoiViewModel tournoiVM = new TournoiViewModel(_context.Tournois.FirstOrDefault(f => f.ID == id));
+
+            return View(tournoiVM);
         }
 
         // POST: Tournoi/Delete/5
+        [Authorize(Roles = "Administrateur,Modérateur")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                _context.Tournois.Remove(_context.Tournois.FirstOrDefault(f => f.ID == id));
+                _context.SaveChanges();
 
                 return RedirectToAction("Index");
             }

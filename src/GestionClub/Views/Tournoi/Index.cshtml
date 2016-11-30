@@ -9,6 +9,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<h3>Tournois en cours!</h3>
+<hr />
 <table class="table">
     <thead>
         <tr>
@@ -27,38 +29,87 @@
             <th>
                 @Html.DisplayNameFor(model => model.Commencer)
             </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(t => t.Terminer == false))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Createur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Commencer)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<hr />
+<hr />
+<h3>Tournois terminer.</h3>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Terminer)
+                @Html.DisplayNameFor(model => model.Titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Commencer)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Createur)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Commencer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Terminer)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new {  id=item.ID  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.ID  })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Where(t => t.Terminer == true))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Createur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Commencer)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -96,7 +96,16 @@ namespace GestionClub.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                Tournoi tournoi = new Tournoi();
+                tournoi.Createur = User.Identity.Name;
+                tournoi.Start = false;
+                tournoi.State = false;
+                tournoi.Participants = new List<Participant>();
+                tournoi.Parties = new List<Partie>();
+
+                TryUpdateModelAsync(tournoi);
+                _context.Tournois.Add(tournoi);
+                _context.SaveChanges();
 
                 return RedirectToAction("Index");
             }

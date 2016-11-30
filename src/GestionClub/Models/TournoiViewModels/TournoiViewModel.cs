@@ -12,7 +12,7 @@ namespace GestionClub.Models.TournoiViewModels
         public string Description { get; set; }
         public string Createur { get; set; }
         public DateTime DateCreation { get; set; }
-        public List<string> Prix { get; set; }
+        public string Prix { get; set; }
         public string Localisation { get; set; }
         public bool Commencer { get; set; }
         public bool Terminer { get; set; }
@@ -38,7 +38,20 @@ namespace GestionClub.Models.TournoiViewModels
 
         public TournoiViewModel(Tournoi tournoi)
         {
+            ID = tournoi.ID;
+            Titre = tournoi.Titre;
+            Description = tournoi.Description;
+            Createur = tournoi.Createur;
+            DateCreation = tournoi.DateCreation;
+            Prix = tournoi.Prix;
+            Localisation = tournoi.Localisation;
+            Commencer = tournoi.Start;
+            Terminer = tournoi.State;
 
+            if (tournoi.Participants != null)
+                Participants = tournoi.Participants;
+            if (tournoi.Parties != null)
+                Parties = tournoi.Parties;
         }
     }
 }

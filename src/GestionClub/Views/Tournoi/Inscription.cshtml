@@ -1,0 +1,28 @@
+@model GestionClub.Models.TournoiViewModels.TournoiViewModel
+
+@{
+    ViewData["Title"] = "Inscription";
+}
+
+<h2>Inscription</h2>
+
+<form asp-action="Inscription">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h4>Confirmer l'inscription au tournoi?</h4>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

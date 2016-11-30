@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using GestionClub.Models.TournoiViewModels;
 using GestionClub.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace GestionClub.Controllers
 {
@@ -55,6 +56,31 @@ namespace GestionClub.Controllers
 
             return View(tournoiVM);
         }
+
+        // GET : Tournoi/Inscription/
+        public ActionResult Inscription()
+        {
+            return View();
+        }
+
+        // POST: Tournoi/Inscription
+        public ActionResult Inscription(IFormCollection collection)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                Participant p = new Participant();
+                p.DateInscription = DateTime.Now;
+                p.NomUtilisateur = User.Identity.Name;
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
         // GET: Tournoi/Create
         [Authorize(Roles = "Administrateur,Modérateur")]
         public ActionResult Create()

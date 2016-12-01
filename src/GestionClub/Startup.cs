@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using Sakura.AspNetCore.Mvc;
 
 namespace GestionClub
 {
@@ -73,6 +74,12 @@ namespace GestionClub
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
+
+            services.AddBootstrapPagerGenerator(options =>
+            {
+                // Use default pager options.
+                options.ConfigureDefault();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

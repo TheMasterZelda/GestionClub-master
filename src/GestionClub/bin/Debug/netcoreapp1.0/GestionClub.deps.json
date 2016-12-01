@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "76c9bbab18ebe46e05e5d501a56e3ce399e628dc"
+    "signature": "fe3058a693a3e9b9b4ace91cd4f873595cb92432"
   },
   "compilationOptions": {
     "defines": [
@@ -33,7 +33,9 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "Sakura.AspNetCore.Mvc.PagedList": "2.0.9",
+          "Sakura.AspNetCore.PagedList": "2.0.1"
         },
         "runtime": {
           "GestionClub.dll": {}
@@ -1858,6 +1860,43 @@
             "rid": "win7-x86",
             "assetType": "native"
           }
+        }
+      },
+      "Sakura.AspNetCore.Mvc.PagedList/2.0.9": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
+          "Microsoft.AspNetCore.Razor.Runtime": "1.0.0",
+          "Sakura.AspNetCore.PagedList.Abstractions": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Sakura.AspNetCore.Mvc.PagedList.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.6/Sakura.AspNetCore.Mvc.PagedList.dll": {}
+        }
+      },
+      "Sakura.AspNetCore.PagedList/2.0.1": {
+        "dependencies": {
+          "Sakura.AspNetCore.PagedList.Abstractions": "2.0.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Threading": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Sakura.AspNetCore.PagedList.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.0/Sakura.AspNetCore.PagedList.dll": {}
+        }
+      },
+      "Sakura.AspNetCore.PagedList.Abstractions/2.0.0": {
+        "dependencies": {
+          "System.Runtime": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/Sakura.AspNetCore.PagedList.Abstractions.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.0/Sakura.AspNetCore.PagedList.Abstractions.dll": {}
         }
       },
       "System.Collections.NonGeneric/4.0.1": {
@@ -4329,6 +4368,21 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-ykiYCf/0hIc0xm+g6bVX8nw9St5Ool+r4US+B+56Lv/GFnDG5G9BK4n7WkrwEpuWV3XjMn38oHgHOnNMzBVNKA=="
+    },
+    "Sakura.AspNetCore.Mvc.PagedList/2.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WOiiFAnWIeuuqq1wAVJ30bYSZyN0bm18TqsBOa3m0/elPXcYtIoUyQpcBKsR2O+uh3lIHCWB6jTG5hc+gkbniA=="
+    },
+    "Sakura.AspNetCore.PagedList/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FULWXVGHxnl6/4nh2R47JIahvJ7UAwiNv/JGTvCvlok7ApfqNfgc+zEkLSAA4mLJ8ZSC+9Y4KqWro9+QwpW03w=="
+    },
+    "Sakura.AspNetCore.PagedList.Abstractions/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oUlEi6NRtcBM8++U5mUf18B7gTri/dKJdrEvQvNb5Qc1z84IQwk93WTCDTudTDEEst1fbIyhGDsMlzGHUNVYKQ=="
     },
     "System.Collections.NonGeneric/4.0.1": {
       "type": "package",

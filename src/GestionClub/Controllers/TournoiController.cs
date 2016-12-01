@@ -68,10 +68,14 @@ namespace GestionClub.Controllers
         {
             try
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 Participant p = new Participant();
                 p.DateInscription = DateTime.Now;
                 p.NomUtilisateur = User.Identity.Name;
+                _context.Participants.Add(p);
+                _context.SaveChanges();
+
+
+
                 return RedirectToAction("Index");
             }
             catch

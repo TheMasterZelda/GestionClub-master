@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using GestionClub.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Sakura.AspNetCore;
 
 namespace GestionClub.Controllers
 {
@@ -22,20 +23,52 @@ namespace GestionClub.Controllers
         }
 
         // GET: Forum
-        public ActionResult Index()
+        public ActionResult Index(string ordretri = null, string motrecherche = null, string champrec = null, int page = 1)
         {
             List<ForumViewModel> liste_vm = new List<ForumViewModel>();
 
             var forums = _context.Forums
                          .Include(m => m.Messages)
-                         .Include(u => u.User);
+                         .Include(u => u.User)
+                         .OrderBy<Forum, object>(delegate (Forum f)
+                         {
+                             if (ordretri != null)
+                             {
+                                 if (ordretri == "Titre")
+                                     return f.Titre;
+                                 else if (ordretri == "NombreMessage")
+                                     return f.NombreMessage;
+                             }
+                             return f.ID;
+                         })
+                         .Where<Forum>(delegate (Forum f)
+                         {
+                             if (motrecherche != null && champrec != null)
+                             {
+                                 if (champrec == "Titre")
+                                     return f.Titre.ToUpper().Contains(motrecherche.ToUpper());
+                                 if (champrec == "NombreMessage")
+                                 {
+                                     int iNombreMots = 0;
+                                     if (Int32.TryParse(motrecherche, out iNombreMots))
+                                     {
+                                         return f.NombreMessage == iNombreMots;
+                                     }
+                                     return false;
+                                 }
+
+                             }
+                             return true;
+                         });
 
             foreach (Forum f in forums)
             {
                 liste_vm.Add(new ForumViewModel(f));
             }
-
-            return View(liste_vm);
+            if (HttpContext.Request.IsAjaxRequest())
+                return PartialView("_IndexListeForumPartial", liste_vm.ToPagedList<ForumViewModel>(5, page));
+            else
+                return View(liste_vm.ToPagedList<ForumViewModel>(5, page));
         }
 
         // GET: Forum/Details/5

@@ -123,6 +123,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>New topic</value>
+  </data>
   <data name="Return" xml:space="preserve">
     <value>Return to topic list</value>
   </data>

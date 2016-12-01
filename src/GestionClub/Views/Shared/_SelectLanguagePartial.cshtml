@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.Extensions.Options
 
-@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
 
@@ -13,8 +13,8 @@
     var cultureItems = LocOptions.Value.SupportedUICultures
     .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
     .ToList(); }
-<div title="@Localizer["Langue:"] @requestCulture?.Provider?.GetType().Name">
+<div title="@SharedLocalizer["Language"] @requestCulture?.Provider?.GetType().Name">
     <form id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@Context.Request.Path" method="post" class="form-horizontal" role="form">
-        @Localizer["Langue:"] <select name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems" onchange="this.form.submit()"></select>
+        @SharedLocalizer["Language"] <select name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems" onchange="this.form.submit()"></select>
     </form>
 </div>

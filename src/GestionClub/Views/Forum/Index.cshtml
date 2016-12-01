@@ -1,19 +1,21 @@
 @model IPagedList<GestionClub.Models.ForumViewModels.ForumViewModel>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@inject IViewLocalizer Localizer
+
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = Localizer["PageTitle"];
     SelectList liste_ordretri = new SelectList(new string[] { "ID","Titre", "NombreMessage" }, "ID");
     SelectList liste_recherche = new SelectList(new string[] { "Titre", "NombreMessage" }, "Titre");
 }
 
 <h2>Index</h2>
-
+<hr />
 <p>
     @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
     {
-        <a asp-action="Create">Ajouter un sujet</a>
+        <a asp-action="Create">@Localizer["AddTopic"]</a>
     }
 </p>
 
@@ -25,15 +27,15 @@
           data-ajax-mode="replace"
           data-ajax-update=".ListeForum">
         <div class="col-md-6">
-            Tri:
+            @Localizer["Sort"] :
             <select name="ordretri" asp-items="@liste_ordretri" class="form-control"></select>
-            <input type="submit" name="Trier" class="btn btn-primary" />
+            <input type="submit" name="@Localizer["Sort"]" value="@Localizer["Sort"]" class="btn btn-primary" />
         </div>
         <div class="col-md-6 text-right">
-            Recherche:
+            @Localizer["Search"] :
             <input type="text" name="motrecherche" class="form-control" />
             <select name="champrec" asp-items="@liste_recherche" class="form-control"></select>
-            <input type="submit" value="Rechercher" class="btn btn-primary" />
+            <input type="submit" value="@Localizer["Search"]" class="btn btn-primary" />
         </div>
     </form>
 </div>

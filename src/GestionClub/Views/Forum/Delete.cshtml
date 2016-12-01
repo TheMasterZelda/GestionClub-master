@@ -1,12 +1,15 @@
 @model GestionClub.Models.ForumViewModels.ForumViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h2>Suppression</h2>
+<h2>@Localizer["PageTitle"]</h2>
 
-<h3>Êtes-vous sûr de vouloir supprimer ce sujet?</h3>
+<h3>@Localizer["Confirm"]</h3>
 <div>
     <h4>ForumViewModel</h4>
     <hr />
@@ -64,7 +67,7 @@
     <form asp-action="Delete">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Retourner à la liste des sujets</a>
+            <a asp-action="Index">@Localizer["Return"]</a>
         </div>
     </form>
 </div>

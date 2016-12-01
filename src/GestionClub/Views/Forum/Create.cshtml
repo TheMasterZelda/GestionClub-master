@@ -1,14 +1,16 @@
 @model GestionClub.Models.ForumViewModels.ForumViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h2>Création</h2>
+<h2>@Localizer["PageTitle"]</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>ForumViewModel</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -27,14 +29,14 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Retourner a la liste des sujets</a>
+    <a asp-action="Index">@Localizer["Return"]</a>
 </div>
 
 @section Scripts {

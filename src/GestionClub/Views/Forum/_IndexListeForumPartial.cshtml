@@ -3,7 +3,6 @@
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 
-
 <div class="ListeForum">
     <pager setting-link-attr-data-ajax="true"
            setting-link-attr-data-ajax-method="GET"
@@ -14,25 +13,25 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.First().Titre)
+                    @SharedLocalizer["Title"]
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.First().Description)
+                    @SharedLocalizer["Description"]
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.First().Auteur)
+                    @SharedLocalizer["Author"]
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.First().Dernier)
+                    @SharedLocalizer["LastMessage"]
                 </th>
                 <th>
-                    #
+                    @SharedLocalizer["Numberofmessage"]
                 </th>
                 <th>
                     @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
                     {
-                        @:Actions
-                }
+                        @SharedLocalizer["Actions"]
+                    }
                 </th>
             </tr>
         </thead>
@@ -60,8 +59,8 @@
                     <td>
                         @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
                         {
-                            @Html.ActionLink("Modifier", "Edit", new { id = item.ID }) @:|
-                            @Html.ActionLink("Supprimer", "Delete", new { id = item.ID })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) @:|
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                         }
                     </td>
                 </tr>

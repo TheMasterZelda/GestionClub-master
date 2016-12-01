@@ -1,25 +1,26 @@
 @model GestionClub.Models.ForumViewModels.ForumViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h2>Modification</h2>
+<h2>@Localizer["Modification"]</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>ForumViewModel</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Titre" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Titre" class="form-control" />
+                <input asp-for="Titre"  class ="form-control" />
                 <span asp-validation-for="Titre" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <label asp-for="Description"  class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger" />
@@ -27,14 +28,14 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Retourner a la liste des sujets</a>
+    <a asp-action="Index">@Localizer["Return"]</a>
 </div>
 
 @section Scripts {

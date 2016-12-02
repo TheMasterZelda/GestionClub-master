@@ -16,6 +16,7 @@ namespace GestionClub.Models
         public  string Localisation { get; set; }
         public bool Start { get; set; }
         public bool State { get; set; }
+        public int NombrePartie { get; set; }
 
         // Foreign Keys
         public List<Participant> Participants { get; set; }

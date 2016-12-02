@@ -1,0 +1,28 @@
+@model GestionClub.Models.TournoiViewModels.TournoiViewModel
+
+@{
+    ViewData["Title"] = "Commencer";
+}
+
+<h2>Commencer</h2>
+
+<form asp-action="Commencer">
+    <div class="form-horizontal">
+        <h4>TournoiViewModel</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

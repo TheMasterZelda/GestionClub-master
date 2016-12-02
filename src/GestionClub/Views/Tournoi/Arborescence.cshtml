@@ -5,67 +5,187 @@
 }
 
 <h2>Arborescence</h2>
+<table class="arborescence">
+    @if (Model.Participants.Count % 8 == 0)
+    {
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                <td>a</td>
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                if (i == 7)
+                {
+                    <td><img src="~/images/arbre.png" /></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                if (i == 6 || i == 8)
+                {
+                    <td>
+                        @if (i == 6)
+                        {
+                            @Model.Parties[6].User1.NomUtilisateur
+                            <br />
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[6].ID, participant = Model.Parties[6].UserId1 })
+                        }
+                        @if (i == 8)
+                        {
+                            @Model.Parties[6].User2.NomUtilisateur
+                            <br />
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[6].ID, participant = Model.Parties[6].UserId2 })
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+    }
+    @if (Model.Participants.Count % 4 == 0)
+    {
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                <td>a</td>
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                if (i == 3 || i == 11)
+                {
+                    <td><img src="~/images/arbre.png" /></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                if (i == 2 || i == 4 || i == 10 || i == 12)
+                {
+                    <td>
+                        @if (i == 2)
+                        {
+                            @Model.Parties[2].User1.NomUtilisateur
+                            <br />
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[2].ID, participant = Model.Parties[2].UserId1 })
+                        }
+                        @if (i == 4)
+                        {
+                            @Model.Parties[2].User2.NomUtilisateur
+                            <br />
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[2].ID, participant = Model.Parties[2].UserId2 })
+                        }
+                        @if (i == 10)
+                        {
+                            @Model.Parties[5].User1.NomUtilisateur
+                            <br />
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[5].ID, participant = Model.Parties[5].UserId1 })
+                        }
+                        @if (i == 12)
+                        {
+                            @Model.Parties[5].User2.NomUtilisateur
+                            <br />
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[5].ID, participant = Model.Parties[5].UserId2 })
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+    }
+    @if (Model.Participants.Count % 2 == 0)
+    {
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                <td>a</td>
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                if (i == 1 || i == 5 || i == 9 || i == 13)
+                {
+                    <td><img src="~/images/arbre.png" /></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    <td>
+                        @Model.Participants[i / 2].NomUtilisateur
+                        <br />
+                        @if (i == 0)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[0].ID, participant = Model.Parties[0].UserId1 })
+                        }
+                        @if (i == 2)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[0].ID, participant = Model.Parties[0].UserId2 })
+                        }
+                        @if (i == 4)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[1].ID, participant = Model.Parties[1].UserId1 })
+                        }
+                        @if (i == 6)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[1].ID, participant = Model.Parties[1].UserId2 })
+                        }
+                        @if (i == 8)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[3].ID, participant = Model.Parties[3].UserId1 })
+                        }
+                        @if (i == 10)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[3].ID, participant = Model.Parties[3].UserId2 })
+                        }
+                        @if (i == 12)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[4].ID, participant = Model.Parties[4].UserId1 })
+                        }
+                        @if (i == 14)
+                        {
+                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[4].ID, participant = Model.Parties[4].UserId2 })
+                        }
+                    </td>
 
-<div>
-    <h4>TournoiViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Titre)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Titre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Createur)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Createur)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateCreation)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Localisation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Localisation)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Commencer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Commencer)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Terminer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Terminer)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Etat)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Etat)
-        </dd>
-    </dl>
-</div>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+        </tr>
+    }
+</table>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>

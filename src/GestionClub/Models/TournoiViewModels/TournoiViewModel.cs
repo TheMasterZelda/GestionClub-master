@@ -25,6 +25,7 @@ namespace GestionClub.Models.TournoiViewModels
         public List<string> NomUtilisateur { get; set; }
         public List<DateTime> DateInscription { get; set; }
         public bool Etat { get; set; }
+        public int NombrePartie { get; set; }
 
         public List<string> NumeroPartie { get; set; }
         public List<DateTime> DateJouerPartie { get; set; }

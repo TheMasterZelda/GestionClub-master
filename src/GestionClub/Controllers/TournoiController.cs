@@ -142,6 +142,136 @@ namespace GestionClub.Controllers
             }
         }
 
+        // POST : Tournoi/Promote/
+        /// [HttpPost]
+        [Authorize(Roles = "Administrateur,Modérateur")]
+        public ActionResult Promote(int id, int partie, int participant)
+        {
+            try
+            {
+                Tournoi tournoi = _context.Tournois
+                            .Include(u => u.Parties)
+                            .Include(p => p.Participants)
+                            .FirstOrDefault(t => t.ID == id);
+                Partie pppp = _context.Parties.FirstOrDefault(t => t.ID == partie);
+                Participant papapapa = _context.Participants.FirstOrDefault(t => t.ID == participant);
+                Participant User1 = _context.Participants.FirstOrDefault(t => t.ID == pppp.UserId1);
+                Participant User2 = _context.Participants.FirstOrDefault(t => t.ID == pppp.UserId2);
+
+                if (User1 == papapapa)
+                    User2.Etat = false;
+                else
+                    User1.Etat = false;
+                pppp.Gagnant = true;
+                pppp.DateJouer = DateTime.Now;
+
+
+                switch (pppp.Numero)
+                {
+                    case 1:
+                        tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().UserId1 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().User1 = papapapa;
+                        break;
+                    case 2:
+                        tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().UserId2 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().User2 = papapapa;
+                        break;
+                    case 3:
+                        tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().UserId1 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().User1 = papapapa;
+                        break;
+                    case 4:
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().UserId1 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().User1 = papapapa;
+                        break;
+                    case 5:
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().UserId2 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().User2 = papapapa;
+                        break;
+                    case 6:
+                        tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().UserId2 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().User2 = papapapa;
+                        break;
+                    case 7:
+                        //tournoi.Parties[2].UserId1 = participant.ID;
+                        break;
+                }
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        // GET : Tournoi/Commencer/
+        public ActionResult Commencer()
+        {
+            return View();
+        }
+        // POST: Tournoi/Commencer/5
+        [HttpPost]
+        [Authorize(Roles = "Administrateur,Modérateur")]
+        public ActionResult Commencer(TournoiViewModel model)
+        {
+            try
+            {
+                Tournoi tournoi = _context.Tournois.FirstOrDefault(t => t.ID == model.ID);
+                int nbr = tournoi.Participants.Count;
+                switch (nbr)
+                {
+                    case 8:
+                        tournoi.NombrePartie = 7;
+                        break;
+                    case 4:
+                        tournoi.NombrePartie = 6;
+                        break;
+                    case 2:
+                        tournoi.NombrePartie = 5;
+                        break;
+                    default:
+                        return View();
+                }
+                int current = 0;
+                for (int i = 0; i < tournoi.NombrePartie; i++)
+                {
+                    if (i < tournoi.Participants.Count / 2)
+                    {
+                        Partie partie = new Partie()
+                        {
+                            Numero = i + 1,
+                            Etat = false,
+                            TournoiId = tournoi.ID,
+                            UserId1 = tournoi.Participants[++current].ID,
+                            UserId2 = tournoi.Participants[++current].ID
+                        };
+                        _context.Parties.Add(partie);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        Partie partie = new Partie()
+                        {
+                            Numero = i + 1,
+                            Etat = false,
+                            TournoiId = tournoi.ID
+                        };
+                        _context.Parties.Add(partie);
+                        _context.SaveChanges();
+                    }
+                }
+
+                tournoi.Start = true;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: Tournoi/Delete/5
         [Authorize(Roles = "Administrateur,Modérateur")]
         public ActionResult Delete(int id)

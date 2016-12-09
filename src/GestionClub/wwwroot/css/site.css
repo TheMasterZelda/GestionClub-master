@@ -25,28 +25,28 @@ textarea {
 
 /* buttons and links extension to use brackets: [ click me ] */
 .btn-bracketed::before {
-    display:inline-block;
+    display: inline-block;
     content: "[";
     padding-right: 0.5em;
 }
+
 .btn-bracketed::after {
-    display:inline-block;
+    display: inline-block;
     content: "]";
     padding-left: 0.5em;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
+.carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
 }
 
 
@@ -56,22 +56,30 @@ textarea {
 @font-face {
     font-family: 'coinyregular';
     src: url('coiny-regular-webfont.eot');
-    src: url('coiny-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('coiny-regular-webfont.woff2') format('woff2'),
-         url('coiny-regular-webfont.woff') format('woff'),
-         url('coiny-regular-webfont.svg#coinyregular') format('svg');
+    src: url('coiny-regular-webfont.eot?#iefix') format('embedded-opentype'), url('coiny-regular-webfont.woff2') format('woff2'), url('coiny-regular-webfont.woff') format('woff'), url('coiny-regular-webfont.svg#coinyregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 
-.navbar_brand{
-    width:150px;
-    height:150px;
+.navbar_brand {
+    width: 150px;
+    height: 150px;
 }
 
 .image_profil {
     height: 150px;
     width: 150px;
+}
+
+table.arborescence tr {
+    /*border: solid black 1px;*/
+    width:50px;
+    height:50px;
+}
+
+table.arborescence td {
+    /*border: solid black 1px;*/
+    width:50px;
+    height:50px;
 }

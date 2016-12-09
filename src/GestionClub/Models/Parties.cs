@@ -8,15 +8,15 @@ namespace GestionClub.Models
     public class Partie
     {
         public int ID { get; set; }
-        public string Numero { get; set; }
+        public int Numero { get; set; }
         public DateTime DateJouer { get; set; }
         public bool Etat { get; set; }
         public bool Gagnant { get; set; }
 
         // Foreign Key
-        public string UserId1 { get; set; }
+        public int UserId1 { get; set; }
         public Participant User1 { get; set; }
-        public string UserId2 { get; set; }
+        public int UserId2 { get; set; }
         public Participant User2 { get; set; }
         public int TournoiId { get; set; }
         public Tournoi Tournoi { get; set; }

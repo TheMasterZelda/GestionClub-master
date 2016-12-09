@@ -1,0 +1,26 @@
+@model GestionClub.Models.TournoiViewModels.TournoiViewModel
+
+@{
+    ViewData["Title"] = "Commencer";
+}
+
+<h2>Commencer</h2>
+
+<form asp-action="Commencer">
+    <div class="form-horizontal">
+        <h4>TournoiViewModel</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            Erreur lors du démarrage, assurez-vous que le nombre de participant est de 2, 4 ou 8.
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

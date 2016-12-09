@@ -57,24 +57,24 @@ namespace GestionClub.Controllers
             return View(tournoiVM);
         }
 
-        // GET : Tournoi/Inscription/
-        public ActionResult Inscription()
-        {
-            return View();
-        }
-
         // POST: Tournoi/Inscription
-        public ActionResult Inscription(IFormCollection collection)
+        [Authorize(Roles = "Administrateur,Utilisateur,ExclustionForum,Modérateur,GrandMaster")]
+        public ActionResult Inscription(int id)
         {
             try
             {
-                Participant p = new Participant();
-                p.DateInscription = DateTime.Now;
-                p.NomUtilisateur = User.Identity.Name;
-                _context.Participants.Add(p);
+                Tournoi tournoi = _context.Tournois
+                           .Include(u => u.Parties)
+                           .Include(p => p.Participants)
+                           .FirstOrDefault(t => t.ID == id);
+                Participant participant = new Participant();
+                participant.DateInscription = DateTime.Now;
+                participant.NomUtilisateur = User.Identity.Name;
+                _context.Participants.Add(participant);
                 _context.SaveChanges();
 
-
+                tournoi.Participants.Add(participant);
+                _context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -134,6 +134,165 @@ namespace GestionClub.Controllers
             {
                 // TODO: Add update logic here
 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // POST : Tournoi/Promote/
+        /// [HttpPost]
+        [Authorize(Roles = "Administrateur,Modérateur")]
+        public ActionResult Promote(int id, int partie, int participant)
+        {
+            try
+            {
+                Tournoi tournoi = _context.Tournois
+                            .Include(u => u.Parties)
+                            .Include(p => p.Participants)
+                            .FirstOrDefault(t => t.ID == id);
+                Partie pppp = _context.Parties.FirstOrDefault(t => t.ID == partie);
+                Participant papapapa = _context.Participants.FirstOrDefault(t => t.ID == participant);
+                Participant User1 = _context.Participants.FirstOrDefault(t => t.ID == pppp.UserId1);
+                Participant User2 = _context.Participants.FirstOrDefault(t => t.ID == pppp.UserId2);
+
+                if (User1 == papapapa)
+                    User2.Etat = false;
+                else
+                    User1.Etat = false;
+                pppp.Gagnant = true;
+                pppp.Etat = true;
+                pppp.DateJouer = DateTime.Now;
+
+
+                switch (pppp.Numero)
+                {
+                    case 1:
+                        if (tournoi.Participants.Count == 2)
+                        {
+                            tournoi.Gagnant = papapapa.NomUtilisateur;
+                            tournoi.State = true;
+                            break;
+                        }
+                        else
+                        {
+                            tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().UserId1 = papapapa.ID;
+                            tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().User1 = papapapa;
+                            break;
+                        }
+                    case 2:
+                        tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().UserId2 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 3).FirstOrDefault().User2 = papapapa;
+                        break;
+                    case 3:
+                        if (tournoi.Participants.Count == 5)
+                        {
+                            tournoi.Gagnant = papapapa.NomUtilisateur;
+                            tournoi.State = true;
+                            break;
+                        }
+                        else
+                        {
+                            tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().UserId1 = papapapa.ID;
+                            tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().User1 = papapapa;
+                            break;
+                        }
+                    case 4:
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().UserId1 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().User1 = papapapa;
+                        break;
+                    case 5:
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().UserId2 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 6).FirstOrDefault().User2 = papapapa;
+                        break;
+                    case 6:
+                        tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().UserId2 = papapapa.ID;
+                        tournoi.Parties.Where(n => n.Numero == 7).FirstOrDefault().User2 = papapapa;
+                        break;
+                    case 7:
+                        tournoi.Gagnant = papapapa.NomUtilisateur;
+                        tournoi.State = true;
+                        break;
+                }
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [Authorize(Roles = "Administrateur,Modérateur")]
+        public ActionResult Commencer(int id)
+        {
+            try
+            {
+                Tournoi tournoi = _context.Tournois
+                            .Include(u => u.Parties)
+                            .Include(p => p.Participants)
+                            .FirstOrDefault(t => t.ID == id);
+                int nbr = tournoi.Participants.Count;
+                switch (nbr)
+                {
+                    case 8:
+                        tournoi.NombrePartie = 7;
+                        break;
+                    case 4:
+                        tournoi.NombrePartie = 3;
+                        break;
+                    case 2:
+                        tournoi.NombrePartie = 1;
+                        break;
+                    default:
+                        return View();
+                }
+                int current = 0;
+                List<Partie> liste = new List<Partie>();
+                for (int i = 0; i < tournoi.NombrePartie; i++)
+                {
+                    if (i == 0 || i == 1 || i == 3 || i == 4)
+                    {
+                        Partie partie = new Partie()
+                        {
+                            Numero = i + 1,
+                            Etat = false,
+                            TournoiId = tournoi.ID,
+                            User1 = tournoi.Participants[current],
+                            UserId1 = tournoi.Participants[current++].ID,
+                            User2 = tournoi.Participants[current],
+                            UserId2 = tournoi.Participants[current++].ID
+                        };
+                        _context.Parties.Add(partie);
+                        _context.SaveChanges();
+                        liste.Add(partie);
+                    }
+                    else
+                    {
+                        Participant temp = new Participant() { NomUtilisateur = "", DateInscription = DateTime.Now, Etat = false, Nom = "", Prénom = "" };
+                        _context.Participants.Add(temp);
+                        _context.SaveChanges();
+                        tournoi.Participants.Add(temp);
+                        _context.SaveChanges();
+                        Partie partie = new Partie()
+                        {
+                            Numero = i + 1,
+                            Etat = false,
+                            TournoiId = tournoi.ID,
+                            User1 = temp,
+                            User2 = temp,
+                        };
+                        _context.Parties.Add(partie);
+                        _context.SaveChanges();
+                        liste.Add(partie);
+                    }
+                }
+                tournoi.Parties = liste;
+                tournoi.Start = true;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

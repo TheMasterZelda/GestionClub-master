@@ -14,8 +14,18 @@
 
 @if (Model.Commencer == false)
 {
-    @Html.ActionLink("Inscription", "Inscription", new { id = Model.ID })
-    @Html.ActionLink("Commencer", "Commencer", new { model = Model })
+    @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur") || User.IsInRole("ExclustionForum") || User.IsInRole("Utilisateur") || User.IsInRole("GrandMaster"))
+    {
+        @if (Model.Participants.Count < 8)
+        {
+            @Html.ActionLink("Inscription", "Inscription", new { id = Model.ID })
+        }
+    }
+    <br />
+    @if (User.IsInRole("Administrateur") || User.IsInRole("Modérateur"))
+    {
+        @Html.ActionLink("Commencer", "Commencer", new { id = Model.ID })
+    }
 }
 else if (Model.Commencer == true)
 {
@@ -44,7 +54,7 @@ else if (Model.Terminer == false && Model.Commencer == true)
     </thead>
     <tbody>
         @foreach (var item in Model.Participants)
-        {
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomUtilisateur)

@@ -3,15 +3,17 @@
 @{
     ViewData["Title"] = "Arborescence";
 }
-
-<h2>Arborescence</h2>
+@if (Model.Gagnant != null)
+{
+<h2>Le gagnant est : @Model.Gagnant</h2>
+}
 <table class="arborescence">
-    @if (Model.Participants.Count % 8 == 0)
+    @if (Model.Participants.Count == 11)
     {
         <tr>
             @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
             {
-                <td>a</td>
+                <td></td>
             }
         </tr>
         <tr>
@@ -37,13 +39,19 @@
                         {
                             @Model.Parties[6].User1.NomUtilisateur
                             <br />
-                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[6].ID, participant = Model.Parties[6].UserId1 })
+                            if (Model.Parties[6].Etat == false)
+                            {
+                                @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[6].ID, participant = Model.Parties[6].UserId1 })
+                            }
                         }
                         @if (i == 8)
                         {
                             @Model.Parties[6].User2.NomUtilisateur
                             <br />
-                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[6].ID, participant = Model.Parties[6].UserId2 })
+                            if (Model.Parties[6].Etat == false)
+                            {
+                                @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[6].ID, participant = Model.Parties[6].UserId2 })
+                            }
                         }
                     </td>
                 }
@@ -54,12 +62,12 @@
             }
         </tr>
     }
-    @if (Model.Participants.Count % 4 == 0)
+    @if (Model.Participants.Count == 11 || Model.Participants.Count == 5)
     {
         <tr>
             @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
             {
-                <td>a</td>
+                <td></td>
             }
         </tr>
         <tr>
@@ -85,25 +93,37 @@
                         {
                             @Model.Parties[2].User1.NomUtilisateur
                             <br />
-                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[2].ID, participant = Model.Parties[2].UserId1 })
+                            if (Model.Parties[2].Etat == false)
+                            {
+                                @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[2].ID, participant = Model.Parties[2].UserId1 })
+                            }
                         }
                         @if (i == 4)
                         {
                             @Model.Parties[2].User2.NomUtilisateur
                             <br />
-                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[2].ID, participant = Model.Parties[2].UserId2 })
+                            if (Model.Parties[2].Etat == false)
+                            {
+                                @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[2].ID, participant = Model.Parties[2].UserId2 })
+                            }
                         }
                         @if (i == 10)
                         {
                             @Model.Parties[5].User1.NomUtilisateur
                             <br />
-                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[5].ID, participant = Model.Parties[5].UserId1 })
+                            if (Model.Parties[5].Etat == false)
+                            {
+                                @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[5].ID, participant = Model.Parties[5].UserId1 })
+                            }
                         }
                         @if (i == 12)
                         {
                             @Model.Parties[5].User2.NomUtilisateur
                             <br />
-                            @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[5].ID, participant = Model.Parties[5].UserId2 })
+                            if (Model.Parties[5].Etat == false)
+                            {
+                                @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[5].ID, participant = Model.Parties[5].UserId2 })
+                            }
                         }
                     </td>
                 }
@@ -114,12 +134,12 @@
             }
         </tr>
     }
-    @if (Model.Participants.Count % 2 == 0)
+    @if (Model.Participants.Count == 11 || Model.Participants.Count == 5 || Model.Participants.Count == 2)
     {
         <tr>
             @for (int i = 0; i < (Model.Participants.Count * 2) - 1; i++)
             {
-                <td>a</td>
+                <td></td>
             }
         </tr>
         <tr>
@@ -143,37 +163,49 @@
                     <td>
                         @Model.Participants[i / 2].NomUtilisateur
                         <br />
-                        @if (i == 0)
+                        @if (i == 0 && Model.Parties[0].Etat == false)
                         {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[0].ID, participant = Model.Parties[0].UserId1 })
                         }
-                        @if (i == 2)
+                        @if (i == 2 && Model.Parties[0].Etat == false)
                         {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[0].ID, participant = Model.Parties[0].UserId2 })
                         }
-                        @if (i == 4)
+                        @if (i == 4 && Model.Parties[1].Etat == false)
                         {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[1].ID, participant = Model.Parties[1].UserId1 })
                         }
-                        @if (i == 6)
+                        @if (i == 6 && Model.Parties[1].Etat == false)
                         {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[1].ID, participant = Model.Parties[1].UserId2 })
                         }
-                        @if (i == 8)
+                        @if (i == 8 && Model.Participants.Count == 11)
                         {
+                            if (Model.Parties[3].Etat == false)
+                            {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[3].ID, participant = Model.Parties[3].UserId1 })
+                            }
                         }
                         @if (i == 10)
                         {
+                            if (Model.Parties[3].Etat == false)
+                            {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[3].ID, participant = Model.Parties[3].UserId2 })
+                            }
                         }
                         @if (i == 12)
                         {
+                            if (Model.Parties[4].Etat == false)
+                            {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[4].ID, participant = Model.Parties[4].UserId1 })
+                            }
                         }
                         @if (i == 14)
                         {
+                            if (Model.Parties[4].Etat == false)
+                            {
                             @Html.ActionLink("Promote", "Promote", new { id = Model.ID, partie = Model.Parties[4].ID, participant = Model.Parties[4].UserId2 })
+                            }
                         }
                     </td>
 
@@ -187,6 +219,5 @@
     }
 </table>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>

@@ -8,9 +8,10 @@ using GestionClub.Data;
 namespace GestionClub.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161202024234_gagnant")]
+    partial class gagnant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -228,8 +229,6 @@ namespace GestionClub.Data.Migrations
                     b.Property<DateTime>("DateCreation");
 
                     b.Property<string>("Description");
-
-                    b.Property<string>("Gagnant");
 
                     b.Property<string>("Localisation");
 

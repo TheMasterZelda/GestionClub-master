@@ -16,7 +16,7 @@ namespace GestionClub.Models.TournoiViewModels
         public string Localisation { get; set; }
         public bool Commencer { get; set; }
         public bool Terminer { get; set; }
-
+        public string Gagnant { get; set; }
 
         public List<Participant> Participants { get; set; }
         public List<Partie> Parties { get; set; }
@@ -48,6 +48,7 @@ namespace GestionClub.Models.TournoiViewModels
             Localisation = tournoi.Localisation;
             Commencer = tournoi.Start;
             Terminer = tournoi.State;
+            Gagnant = tournoi.Gagnant;
 
             if (tournoi.Participants != null)
                 Participants = tournoi.Participants;

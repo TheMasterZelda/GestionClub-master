@@ -14,6 +14,7 @@ namespace GestionClub.Models
         public DateTime DateCreation { get; set; }
         public string Prix { get; set; }
         public  string Localisation { get; set; }
+        public string Gagnant { get; set; }
         public bool Start { get; set; }
         public bool State { get; set; }
         public int NombrePartie { get; set; }

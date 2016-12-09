@@ -253,6 +253,10 @@ C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161104162825_AjouterU
 C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161104162825_AjouterUserLiaison.Designer.cs
 C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161126204929_lethality.cs
 C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161126204929_lethality.Designer.cs
+C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161202024234_gagnant.cs
+C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161202024234_gagnant.Designer.cs
+C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161202024453_gagnants.cs
+C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\20161202024453_gagnants.Designer.cs
 C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\tp\GestionClub-master\src\GestionClub\Data\Migrations\SeedData.cs
 C:\tp\GestionClub-master\src\GestionClub\Models\ApplicationUser.cs

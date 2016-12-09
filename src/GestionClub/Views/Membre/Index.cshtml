@@ -1,4 +1,6 @@
 @model IEnumerable<GestionClub.Models.MembreViewModels.MembreViewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Liste des membres";
@@ -9,7 +11,7 @@
 <p>
     @if (User.IsInRole("Administrateur"))
     {
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">@Localizer["CreateNew"]</a>
     }
 </p>
 <table class="table">
@@ -19,18 +21,23 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomUtilisateur)
+                @Localizer["Username"]
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageData)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rang)
+                @Localizer["Rank"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                @Localizer["Role"]
             </th>
-            <th></th>
+            <th>
+                @if (User.IsInRole("Administrateur"))
+                {
+                    @Localizer["Actions"]
+                }
+            </th>
         </tr>
     </thead>
     <tbody>

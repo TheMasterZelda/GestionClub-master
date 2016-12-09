@@ -11,7 +11,6 @@
 
 <h3>@Localizer["Confirm"]</h3>
 <div>
-    <h4>ForumViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,7 +20,7 @@
             @Html.DisplayFor(model => model.ID)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Titre)
+            @Localizer["Title"]
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Titre)
@@ -33,31 +32,19 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Auteur)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Auteur)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreation)
+            @Localizer["CreationDate"]
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DateCreation)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Dernier)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dernier)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateModification)
+            @Localizer["ModDate"]
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DateModification)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.NombreMessage)
+            @Localizer["NumberMessage"]
         </dt>
         <dd>
             @Html.DisplayFor(model => model.NombreMessage)

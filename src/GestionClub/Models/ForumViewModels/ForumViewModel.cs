@@ -11,6 +11,7 @@ namespace GestionClub.Models.ForumViewModels
         public int ID { get; set; }
         [Required]
         [StringLength(30, ErrorMessage = "La limite de caractère est de 30.")]
+        [Display(Name = "Title")]
         public string Titre { get; set; }
         [StringLength(150, ErrorMessage = "La limite de caractère est de 150.")]
         public string Description { get; set; }
@@ -19,7 +20,6 @@ namespace GestionClub.Models.ForumViewModels
         public DateTime DateCreation { get; set; }
         [Required]
         public int NombreMessage { get; set; }
-        [Display(Name = "Auteur")]
         // Foreign Variable
         public List<string> MessageAuteur { get; set; }
         [Display(Name = "Message")]
